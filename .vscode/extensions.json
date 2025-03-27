@@ -1,0 +1,7 @@
+{
+    "recommendations": [
+        "ms-ceintl.vscode-language-pack-ja",
+        // devcontainer を動作させるための推奨拡張機能
+        "ms-vscode-remote.vscode-remote-extensionpack"
+    ]
+}

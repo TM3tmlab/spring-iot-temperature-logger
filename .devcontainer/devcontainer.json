@@ -1,0 +1,36 @@
+// For format details, see https://aka.ms/devcontainer.json. For config options, see the
+// README at: https://github.com/devcontainers/templates/tree/main/src/java
+{
+	"name": "Java Environment",
+	// 事前導入は行わないので、イメージを直接利用する
+	"image": "mcr.microsoft.com/devcontainers/java:1-21-bullseye",
+
+	"features": {
+		"ghcr.io/devcontainers/features/java:1": {
+			"version": "none",
+			"installMaven": "false",
+			"installGradle": "true"
+		}
+	},
+
+	"postCreateCommand": "java workspace/setupcheck/Main.java",
+
+	// 事前に導入する拡張機能
+    "customizations": {
+        "vscode": {
+            "extensions": [
+                "vscjava.vscode-java-pack",
+                "redhat.java",
+                "vscjava.vscode-maven",
+				// エディターの標準スタイルの指定
+                "EditorConfig.EditorConfig",
+				// 全角スペースの明示
+				"mosapride.zenkaku"
+            ]
+            // 設定項目は.vscode/settings.jsonに記入する
+        }
+    },
+
+	// 実行ユーザーの指定
+    "remoteUser": "vscode"
+}
