@@ -1,0 +1,58 @@
+{
+    // 非表示ファイル
+    "files.exclude": {
+        "**/.git": true,
+        "**/.svn": true,
+        "**/.hg": true,
+        "**/.DS_Store": true,
+        "**/Thumbs.db": true,
+        "**/.gitkeep": true
+    },
+    // Java 設定
+    "[java]": {
+        "editor.suggest.snippetsPreventQuickSuggestions": false,
+        // 貼り付け時にフォーマットを行う
+        "editor.formatOnPaste": true,
+        "editor.formatOnType": true,
+        "editor.formatOnSave": true,
+        // 自動保存を行うか
+        // "files.autoSave": "onWindowChange",
+        // 行番号表示
+        "editor.lineNumbers": "on",
+        // ファイル保存時のインポート編集を有効化
+        "editor.codeActionsOnSave": {
+            "source.organizeImports": "explicit"
+        },
+
+    },
+    // コーディングスタイルのURL
+    "java.format.settings.url": "https://raw.githubusercontent.com/google/styleguide/gh-pages/eclipse-java-google-style.xml",
+    "java.format.settings.profile": "GoogleStyle",
+    // コピー時の書式設定除去
+    "editor.copyWithSyntaxHighlighting": false,
+    // 入力候補の表示制御
+    "editor.quickSuggestions": {
+        "other": "on",
+        "comments": "off",
+        "strings": "off"
+    },
+    "editor.quickSuggestionsDelay": 30,
+    "java.configuration.updateBuildConfiguration": "automatic",
+    "java.server.launchMode": "Standard",
+    // 引数名の表示(表示のみでソースコードに変化はない)
+    "java.inlayHints.parameterNames.enabled": "all",
+    "terminal.integrated.defaultProfile.linux": "bash",
+     // 推奨拡張機能の強制表示
+    "extensions.ignoreRecommendations": false,
+    // ミニマップ非表示
+    "editor.minimap.enabled": false,
+    // コード支援で表示しないパッケージ
+    "java.completion.filteredTypes": [
+        "com.sun.*",
+        "sun.*",
+        "jdk.*",
+        "org.graalvm.*",
+        "io.micrometer.shaded.*",
+        "java.awt.*"
+    ]
+}
