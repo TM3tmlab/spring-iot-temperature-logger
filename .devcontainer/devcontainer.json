@@ -22,10 +22,12 @@
                 "vscjava.vscode-java-pack",
                 "redhat.java",
                 "vscjava.vscode-maven",
+				"vscjava.vscode-gradle",
 				// エディターの標準スタイルの指定
                 "EditorConfig.EditorConfig",
 				// 全角スペースの明示
-				"mosapride.zenkaku"
+				"mosapride.zenkaku",
+				"oderwat.indent-rainbow"
             ]
             // 設定項目は.vscode/settings.jsonに記入する
         }
