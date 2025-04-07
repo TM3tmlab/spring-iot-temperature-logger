@@ -1,0 +1,13 @@
+{
+    "configurations": [
+        {
+            // Ctrl + F5 によるデバッグなしで実行でも有効です
+            "name": "Java デバッグ: 現在のファイル",
+            "type": "java",
+            "request": "launch",
+            "mainClass": "${file}",
+            "cwd": "${fileDirname}",
+            "console": "integratedTerminal"
+        }
+    ]
+}
