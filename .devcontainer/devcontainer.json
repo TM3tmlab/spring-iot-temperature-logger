@@ -27,7 +27,8 @@
                 "EditorConfig.EditorConfig",
 				// 全角スペースの明示
 				"mosapride.zenkaku",
-				"oderwat.indent-rainbow"
+				"oderwat.indent-rainbow",
+				"usernamehw.errorlens"
             ]
             // 設定項目は.vscode/settings.jsonに記入する
         }
