@@ -64,5 +64,25 @@
         "org.graalvm.*",
         "io.micrometer.shaded.*",
         "java.awt.*"
+    ],
+    // ソースコード配置パスの指定
+    "java.project.sourcePaths": [
+        "workspace/setupcheck",
+        "workspace/chap01",
+        "workspace/chap02",
+        "workspace/chap03",
+        "workspace/chap04",
+        "workspace/chap05",
+        "workspace/chap06",
+        "workspace/chap07",
+        "workspace/chap08",
+        "workspace/chap09",
+        "workspace/chap10",
+        "workspace/chap11",
+        "workspace/chap12",
+        "workspace/chap13",
+        "workspace/chap14",
+        "workspace/chap15",
+        "workspace/chap16",
     ]
 }
