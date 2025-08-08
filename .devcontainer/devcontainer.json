@@ -28,8 +28,7 @@
 				// 全角スペースの明示
 				"mosapride.zenkaku",
 				"oderwat.indent-rainbow",
-				"usernamehw.errorlens",
-				"vmware.vscode-boot-dev-pack"
+				"usernamehw.errorlens"
             ]
             // 設定項目は.vscode/settings.jsonに記入する
         }
