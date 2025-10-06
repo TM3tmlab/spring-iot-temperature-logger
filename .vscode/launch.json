@@ -1,13 +1,15 @@
 {
     "configurations": [
         {
-            // Ctrl + F5 によるデバッグなしで実行でも有効です
-            "name": "Java デバッグ: 現在のファイル",
             "type": "java",
+            "name": "Spring Boot-IotRobotApplication<workspace>",
             "request": "launch",
-            "mainClass": "${file}",
-            "cwd": "${fileDirname}",
-            "console": "integratedTerminal"
+            "cwd": "${workspaceFolder}",
+            "mainClass": "human.college.it.iotrobot.IotRobotApplication",
+            "projectName": "workspace",
+            "args": " --spring.profiles.active=dev ",
+            "envFile": "${workspaceFolder}/.env",
+            "vmArgs": " -Dspring.devtools.restart.enabled=true"
         }
     ]
 }

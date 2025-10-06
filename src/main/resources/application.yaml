@@ -1,0 +1,14 @@
+spring:
+  profiles:
+    active:
+    - dev
+  application.name: iotrobot
+  datasource:
+    url: jdbc:mysql://db:3306/sensor_db?useSSL=false&serverTimezone=UTC&allowPublicKeyRetrieval=true
+    username: reader
+    password: secretpass
+    driver-class-name: com.mysql.cj.jdbc.Driver
+  docker:
+    compose:
+      enabled: false
+

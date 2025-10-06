@@ -33,7 +33,6 @@
         "editor.codeActionsOnSave": {
             "source.organizeImports": "explicit"
         },
-
     },
     // コーディングスタイルのURL
     "java.format.settings.url": "https://raw.githubusercontent.com/google/styleguide/gh-pages/eclipse-java-google-style.xml",
@@ -52,7 +51,7 @@
     // 引数名の表示(表示のみでソースコードに変化はない)
     "java.inlayHints.parameterNames.enabled": "all",
     "terminal.integrated.defaultProfile.linux": "bash",
-     // 推奨拡張機能の強制表示
+    // 推奨拡張機能の強制表示
     "extensions.ignoreRecommendations": false,
     // ミニマップ非表示
     "editor.minimap.enabled": false,
@@ -67,22 +66,10 @@
     ],
     // ソースコード配置パスの指定
     "java.project.sourcePaths": [
-        "workspace/setupcheck",
-        "workspace/chap01",
-        "workspace/chap02",
-        "workspace/chap03",
-        "workspace/chap04",
-        "workspace/chap05",
-        "workspace/chap06",
-        "workspace/chap07",
-        "workspace/chap08",
-        "workspace/chap09",
-        "workspace/chap10",
-        "workspace/chap11",
-        "workspace/chap12",
-        "workspace/chap13",
-        "workspace/chap14",
-        "workspace/chap15",
-        "workspace/chap16",
-    ]
+        "src/main/java",
+        "src/main/resources",
+        "src/test/java",
+        "src/test/resources"
+    ],
+    "java.compile.nullAnalysis.mode": "disabled"
 }

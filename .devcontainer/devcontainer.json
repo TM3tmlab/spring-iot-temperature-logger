@@ -1,40 +1,39 @@
 // For format details, see https://aka.ms/devcontainer.json. For config options, see the
 // README at: https://github.com/devcontainers/templates/tree/main/src/java
 {
-	"name": "Java Environment",
-	// 事前導入は行わないので、イメージを直接利用する
-	"image": "mcr.microsoft.com/devcontainers/java:1-21-bullseye",
-
+	"name": "Spring IoT Temperature Logger",
+	"dockerComposeFile": [
+		"../compose.yaml"
+	],
+	"service": "app",
+	"workspaceFolder": "/workspace",
 	"features": {
-		"ghcr.io/devcontainers/features/java:1": {
-			"version": "none",
-			"installMaven": "false",
-			"installGradle": "true"
-		}
+		"ghcr.io/devcontainers/features/java:1": {},
+		"ghcr.io/devcontainers/features/docker-outside-of-docker": {}
 	},
-
-	"postCreateCommand": "java workspace/setupcheck/Main.java",
-
+	"forwardPorts": [
+		8080
+	],
 	// 事前に導入する拡張機能
-    "customizations": {
-        "vscode": {
-            "extensions": [
-                "vscjava.vscode-java-pack",
-                "redhat.java",
-                "vscjava.vscode-maven",
+	"customizations": {
+		"vscode": {
+			"extensions": [
+				"vscjava.vscode-java-pack",
+				"redhat.java",
+				"vscjava.vscode-maven",
 				"vscjava.vscode-gradle",
 				// エディターの標準スタイルの指定
-                "EditorConfig.EditorConfig",
+				"EditorConfig.EditorConfig",
 				// 全角スペースの明示
 				"mosapride.zenkaku",
 				"oderwat.indent-rainbow",
 				"usernamehw.errorlens",
-				"vmware.vscode-boot-dev-pack"
-            ]
-            // 設定項目は.vscode/settings.jsonに記入する
-        }
-    },
-
+				"vmware.vscode-boot-dev-pack",
+				"ms-azuretools.vscode-docker"
+			]
+			// 設定項目は.vscode/settings.jsonに記入する
+		}
+	},
 	// 実行ユーザーの指定
-    "remoteUser": "vscode"
+	"remoteUser": "vscode"
 }

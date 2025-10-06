@@ -1,10 +1,31 @@
 services:
-  mysql:
-    image: 'mysql:latest'
+  app:
+    image: mcr.microsoft.com/devcontainers/java:1-21-bullseye
+    volumes:
+      - .:/workspace:cached
+    command: sleep infinity
+    depends_on:
+      - db
+    networks:
+      - iotlogger-group
+  db:
+    image: 'mysql:lts'
     environment:
-      - 'MYSQL_DATABASE=mydatabase'
-      - 'MYSQL_PASSWORD=secret'
-      - 'MYSQL_ROOT_PASSWORD=verysecret'
-      - 'MYSQL_USER=myuser'
+      - 'MYSQL_DATABASE=sensor_db'
+      - 'MYSQL_ROOT_PASSWORD=mariaroot'
+      - 'MYSQL_USER=reader'
+      - 'MYSQL_PASSWORD=secretpass'
     ports:
-      - '3306'
+      - '32776:3306'
+    # 開発用初期データはschemaフォルダにSQLファイルを配置する
+    volumes:
+      - mysql-data:/var/lib/mysql
+      - ./schema:/docker-entrypoint-initdb.d
+    networks:
+      - iotlogger-group
+volumes:
+  mysql-data:
+    driver: local
+networks:
+  iotlogger-group:
+    external: true

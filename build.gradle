@@ -27,6 +27,11 @@ dependencies {
 	implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
 	implementation 'org.springframework.boot:spring-boot-starter-thymeleaf'
 	implementation 'org.springframework.boot:spring-boot-starter-web'
+
+	// JFreeChart https://mvnrepository.com/artifact/org.jfree/jfreechart
+	// グラフ画像生成用ライブラリ
+	implementation 'org.jfree:jfreechart:1.5.6'
+	
 	compileOnly 'org.projectlombok:lombok'
 	developmentOnly 'org.springframework.boot:spring-boot-devtools'
 	developmentOnly 'org.springframework.boot:spring-boot-docker-compose'

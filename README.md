@@ -21,8 +21,8 @@ Java を Visual Studio Code で学ぶための環境一式です。
 
 ## 拡張機能
 
-- [RedHat Java支援パック redhat.java](https://marketplace.visualstudio.com/items?itemName=redhat.java)
-- [Java拡張機能セット vscjava.vscode-java-pack](https://marketplace.visualstudio.com/items?itemName=vscjava.vscode-java-pack)
+- [RedHat Java 支援パック redhat.java](https://marketplace.visualstudio.com/items?itemName=redhat.java)
+- [Java 拡張機能セット vscjava.vscode-java-pack](https://marketplace.visualstudio.com/items?itemName=vscjava.vscode-java-pack)
 - [エディターの標準スタイルの指定 EditorConfig.EditorConfig](https://marketplace.visualstudio.com/items?itemName=EditorConfig.EditorConfig)
 - [エラー展開表示 usernamehw.errorlens](https://marketplace.visualstudio.com/items?itemName=usernamehw.errorlens)
 - [全角スペースの明示 mosapride.zenkaku](https://marketplace.visualstudio.com/items?itemName=mosapride.zenkaku)
@@ -47,3 +47,15 @@ Java を Visual Studio Code で学ぶための環境一式です。
 launch.json で `編集中のディレクトリで実行する` 設定しているので `F5 による起動` をお勧めします。ただし、`mainメソッドがないソースコード`は実行できません。
 
 `F5` でデバッグ起動、`Shift + F5` でデバッグなし起動になります。
+
+## FAQ
+
+### MariaDB のを初期化したい
+
+```shell
+docker rm spring-iot-temperature-logger-db-1
+```
+
+```shell
+docker volume rm spring-iot-temperature-logger_mysql-data
+```
