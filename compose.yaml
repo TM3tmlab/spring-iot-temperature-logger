@@ -28,4 +28,4 @@ volumes:
     driver: local
 networks:
   iotlogger-group:
-    external: true
+    external: false
