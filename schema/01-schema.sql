@@ -11,7 +11,7 @@ GRANT SELECT ON sensor_db.* TO 'reader'@'%';
 
 CREATE TABLE IF NOT EXISTS bme280_log (
     id INT AUTO_INCREMENT PRIMARY KEY COMMENT 'PK',
-    timestamp DATETIME NOT NULL COMMENT '記録年月日',
+    timestamp DATETIME NOT NULL COMMENT '記録年月日', -- 2038年問題対策でDATETIMEを使用
     temperature DOUBLE NOT NULL COMMENT '温度(℃)',
     humidity DOUBLE NOT NULL COMMENT '湿度',
     pressure DOUBLE NOT NULL COMMENT '気圧(Pa)',
