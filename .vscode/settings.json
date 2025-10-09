@@ -61,8 +61,8 @@
         "sun.*",
         "jdk.*",
         "org.graalvm.*",
-        "io.micrometer.shaded.*",
-        "java.awt.*"
+        "io.micrometer.shaded.*"
+        // "java.awt.*"
     ],
     // ソースコード配置パスの指定
     "java.project.sourcePaths": [

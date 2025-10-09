@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset='utf-8'>
+    <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+    <title>IoTセンサーロガーシステム</title>
+    <meta name='viewport' content='width=device-width, initial-scale=1'>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@1.0.4/css/bulma.min.css">
+</head>
+
+<body>
+    <h1>IoTセンサーロガーシステム</h1>
+    <table class="table is-striped is-fullwidth">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Timestamp</th>
+                <th>Temperature</th>
+                <th>Humidity</th>
+                <th>Pressure</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr th:each="sensor : ${sensors}">
+                <td th:text="${sensor.id}"></td>
+                <td th:text="${sensor.timestamp}"></td>
+                <td th:text="${sensor.temperature}"></td>
+                <td th:text="${sensor.humidity}"></td>
+                <td th:text="${sensor.pressure}"></td>
+            </tr>
+        </tbody>
+    </table>
+</body>
+
+</html>
