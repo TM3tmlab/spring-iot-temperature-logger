@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>やまびこ</title>
+</head>
+<body>
+  <h1>やまびこ Web アプリです</h1>
+
+  <section>
+    <h2>オウム返し</h2>
+    <p>入力したメッセージをそのまま返します。</p>
+    <th:block th:if="${echo}">
+    <p th:utext="${echo}">オウム返し</p>
+    </th:block>
+
+    <form th:action="@{/echo/echo}" method="post">
+      <label for="message">メッセージ:</label>
+      <input type="text" id="message" name="echo" required>
+      <button type="submit">声を出す</button>
+    </form>
+  </section>
+  <section>
+    <h2>やまびこ</h2>
+    <p>入力したメッセージを一文字ずつ減らして返します。</p>
+    <th:block th:if="${yamabiko}">
+      <p th:each="line : ${yamabiko}" th:text="${line}">やまびこ</p>
+    </th:block>
+
+    <form th:action="@{/echo/yamabiko}" method="post">
+      <label for="message">メッセージ:</label>
+      <input type="text" id="message" name="yamabiko" required>
+      <button type="submit">声を出す</button>
+    </form>
+  </section>
+</body>
+</html>
