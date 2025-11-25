@@ -1,10 +1,12 @@
 <!DOCTYPE html>
-<html lang="ja">
+<html lang="ja" xmlns:th="http://www.thymeleaf.org">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>やまびこ</title>
 </head>
+
 <body>
   <h1>やまびこ Web アプリです</h1>
 
@@ -12,12 +14,12 @@
     <h2>オウム返し</h2>
     <p>入力したメッセージをそのまま返します。</p>
     <th:block th:if="${echo}">
-    <p th:utext="${echo}">オウム返し</p>
+      <p th:utext="${echo}">オウム返し</p>
     </th:block>
 
-    <form th:action="@{/echo/echo}" method="post">
-      <label for="message">メッセージ:</label>
-      <input type="text" id="message" name="echo" required>
+    <form th:action="@{/yamabiko/echo}" method="post">
+      <label for="echomessage">メッセージ:</label>
+      <input type="text" id="echomessage" name="echo" required>
       <button type="submit">声を出す</button>
     </form>
   </section>
@@ -28,11 +30,12 @@
       <p th:each="line : ${yamabiko}" th:text="${line}">やまびこ</p>
     </th:block>
 
-    <form th:action="@{/echo/yamabiko}" method="post">
-      <label for="message">メッセージ:</label>
-      <input type="text" id="message" name="yamabiko" required>
+    <form th:action="@{/yamabiko/reduce}" method="post">
+      <label for="yamabikomessage">メッセージ:</label>
+      <input type="text" id="yamabikomessage" name="yamabiko" required>
       <button type="submit">声を出す</button>
     </form>
   </section>
 </body>
+
 </html>

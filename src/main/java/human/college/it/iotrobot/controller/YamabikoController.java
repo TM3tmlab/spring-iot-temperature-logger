@@ -13,8 +13,8 @@ import org.springframework.web.bind.annotation.RequestParam;
  * エコーコントローラー
  */
 @Controller
-@RequestMapping("/echo")
-public class EchoController {
+@RequestMapping("/yamabiko")
+public class YamabikoController {
 
     /**
      * トップページを表示する
@@ -23,7 +23,7 @@ public class EchoController {
      */
     @GetMapping
     public String index() {
-        return "echo";
+        return "yamabiko";
     }
 
     /**
@@ -36,7 +36,7 @@ public class EchoController {
     @PostMapping("echo")
     public String echo(@RequestParam("echo") String echoString, Model model) {
         model.addAttribute("echo", echoString);
-        return "echo";
+        return "yamabiko";
     }
 
     /**
@@ -46,7 +46,7 @@ public class EchoController {
      * @param model モデル
      * @return html
      */
-    @PostMapping("yamabiko")
+    @PostMapping("reduce")
     public String yamabiko(@RequestParam("yamabiko") String yamabikoString, Model model) {
         // やまびこのようにリクエストした文字列を一文字ずつ減らしながら表示する
         // 減らした文字列は リストに格納し、後の加工はHTMLに任せる
@@ -55,7 +55,7 @@ public class EchoController {
             yamabikoList.add(yamabikoString.substring(i));
         }
         model.addAttribute("yamabiko", yamabikoList);
-        return "echo";
+        return "yamabiko";
     }
 
 }

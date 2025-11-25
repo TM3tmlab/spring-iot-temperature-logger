@@ -20,7 +20,7 @@ public class OmikujiController {
      */
     @GetMapping
     public String index() {
-        return "mikuji";
+        return "omikuji";
     }
 
     /**
@@ -29,14 +29,14 @@ public class OmikujiController {
      * @param model モデル
      * @return html
      */
-    @GetMapping("/mikuji")
-    public String pickMikuji(Model model) {
+    @GetMapping("/fortune")
+    public String showFortune(Model model) {
 
         Random rand = new Random();
         String[] fortunes = {"大吉", "中吉", "小吉", "吉", "末吉", "凶"};
         String fortune = fortunes[rand.nextInt(fortunes.length)];
 
         model.addAttribute("fortune", fortune);
-        return "mikuji";
+        return "omikuji";
     }
 }
