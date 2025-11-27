@@ -47,7 +47,7 @@ public class YamabikoController {
      * @return html
      */
     @PostMapping("reduce")
-    public String yamabiko(@RequestParam("yamabiko") String yamabikoString, Model model) {
+    public String yamabiko(@RequestParam("reduce") String yamabikoString, Model model) {
         // やまびこのようにリクエストした文字列を一文字ずつ減らしながら表示する
         // 減らした文字列は リストに格納し、後の加工はHTMLに任せる
         List<String> yamabikoList = new ArrayList<>();
