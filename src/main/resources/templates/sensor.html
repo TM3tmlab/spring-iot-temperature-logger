@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="ja" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>センサーデータ表示</title>
+</head>
+
+<body>
+  <h1>センサーデータ表示</h1>
+
+  <section th:if="${distinctDates}">
+    <h2>センサーデータの記録日一覧</h2>
+    <ul>
+      <li th:each="date : ${distinctDates}">
+        <a th:href="@{/sensor(date=${#dates.format(date, 'yyyy-MM-dd')})}"
+          th:text="${#dates.format(date, 'yyyy/MM/dd')}">2025/09/01</a>
+      </li>
+    </ul>
+  </section>
+  <section th:if="${sensorData}">
+    <h2 th:text="'センサーデータ一覧 (' + ${selectedDate} + ')'">センサーデータ一覧</h2>
+    <table border="1">
+      <thead>
+        <tr>
+          <th>Timestamp</th>
+          <th>Temperature (°C)</th>
+          <th>Humidity (%)</th>
+          <th>Pressure (hPa)</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr th:each="data : ${sensorData}">
+          <td th:text="${#temporals.format(data.timestamp, 'yyyy-MM-dd HH:mm:ss')}">2025-09-01 12:00:00</td>
+          <td th:text="${data.temperature}">25.0</td>
+          <td th:text="${data.humidity}">50.0</td>
+          <td th:text="${data.pressure}">1013.25</td>
+        </tr>
+      </tbody>
+    </table>
+  </section>
+</body>
+
+</html>
