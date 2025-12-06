@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="ja" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title th:text="${graphTypeName}">温度グラフ</title>
+</head>
+<body>
+  <h1 th:text="${graphTypeName}">温度グラフ</h1>
+  <!-- ダミーグラフ画像表示 -->
+  <section>
+    <h2>ダミー画像(画像返却の学習)</h2>
+    <img th:src="@{/sensor-graph/dummy}" alt="ダミーグラフ"/>
+  </section>
+  <!-- 固定日のグラフ画像表示 -->
+  <section>
+    <h2>日付固定の温度グラフ</h2>
+    <img th:src="@{/sensor-graph/temperature?targetDate=2025-09-01}" alt="2025-09-01 の温度グラフ"/>
+  </section>
+  <!-- グラフ対象日を選択できるようにプルダウン -->
+  <section th:if="${distinctDates}">
+    <h2>表示日選択</h2>
+    <form th:action="@{/sensor/{graphType}(graphType=${graphType})}" method="GET">
+      <label for="targetDate">対象日:</label>
+      <select name="targetDate" id="targetDate">
+        <option
+          th:each="date : ${distinctDates}"
+          th:value="${#dates.format(date, 'yyyy-MM-dd')}"
+          th:text="${#dates.format(date, 'yyyy/MM/dd')}"
+          th:selected="${#dates.format(date, 'yyyy-MM-dd') == #temporals.format(targetDate, 'yyyy-MM-dd')}"
+        >
+          2025/09/01
+        </option>
+      </select>
+      <button type="submit">表示</button>
+    </form>
+  </section>
+  <!-- 対象日のグラフを表示 -->
+  <section style="margin: 4em;">
+    <img th:src="@{/sensor-graph/{graphType}(graphType=${graphType}, targetDate=${targetDate})}" alt=""/>
+  </section>
+
+</body>
+</html>
