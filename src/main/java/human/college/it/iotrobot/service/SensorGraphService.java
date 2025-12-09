@@ -2,12 +2,17 @@ package human.college.it.iotrobot.service;
 
 import java.awt.Color;
 import java.awt.Font;
+import java.awt.Graphics2D;
+import java.awt.image.BufferedImage;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.time.ZoneId;
 import java.time.format.DateTimeFormatter;
+import java.util.Date;
 import java.util.List;
+import javax.imageio.ImageIO;
 import org.jfree.chart.ChartFactory;
 import org.jfree.chart.ChartUtils;
 import org.jfree.chart.JFreeChart;
@@ -18,8 +23,6 @@ import org.jfree.chart.renderer.xy.XYLineAndShapeRenderer;
 import org.jfree.data.time.Minute;
 import org.jfree.data.time.TimeSeries;
 import org.jfree.data.time.TimeSeriesCollection;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 import human.college.it.iotrobot.entity.SensorEntity;
 import human.college.it.iotrobot.repository.SensorRepository;
@@ -27,11 +30,37 @@ import human.college.it.iotrobot.repository.SensorRepository;
 @Service
 public class SensorGraphService {
 
-    private static final Logger log = LoggerFactory.getLogger(SensorGraphService.class);
+    // private static final Logger log = LoggerFactory.getLogger(SensorGraphService.class);
     private final SensorRepository sensorRepository;
 
     public SensorGraphService(SensorRepository sensorRepository) {
         this.sensorRepository = sensorRepository;
+    }
+
+    /**
+     * ダミー画像を生成して返す
+     *
+     * @return PNG形式のダミー画像のバイト配列
+     */
+    public byte[] createDummyImage() {
+        // 空画像を返す例
+        ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
+        final int width = 800;
+        final int height = 600;
+        BufferedImage image = new BufferedImage(width, height, BufferedImage.TYPE_INT_ARGB);
+        Graphics2D g2d = image.createGraphics();
+        try {
+            // 緑で塗りつぶし背景色を描画
+            g2d.setColor(Color.GREEN);
+            g2d.fillRect(0, 0, width, height);
+
+            ImageIO.write(image, "png", outputStream);
+            return outputStream.toByteArray();
+        } catch (Exception e) {
+            throw new RuntimeException("ダミー画像の生成に失敗しました", e);
+        } finally {
+            g2d.dispose();
+        }
     }
 
     /**
@@ -57,7 +86,7 @@ public class SensorGraphService {
             List<SensorEntity> sensors = getTargetDateSensors(date);
 
             if (sensors.isEmpty()) {
-                log.warn("No sensor data found for date: {}", date);
+                // log.warn("No sensor data found for date: {}", date);
                 return createNoDataChart(date);
             }
 
@@ -68,8 +97,7 @@ public class SensorGraphService {
             return chartToByteArray(chart, 800, 600);
 
         } catch (Exception e) {
-            log.error("Error generating graph image for date: {}", date, e);
-            return new byte[0];
+            throw new RuntimeException("グラフ画像の生成に失敗しました", e);
         }
     }
 
@@ -82,8 +110,8 @@ public class SensorGraphService {
 
         for (SensorEntity sensor : sensors) {
             // LocalDateTimeをMinuteに変換
-            Minute minute = new Minute(java.util.Date.from(
-                    sensor.getTimestamp().atZone(java.time.ZoneId.systemDefault()).toInstant()));
+            Minute minute = new Minute(
+                    Date.from(sensor.getTimestamp().atZone(ZoneId.systemDefault()).toInstant()));
             series.add(minute, sensor.getTemperature());
         }
 
@@ -104,7 +132,7 @@ public class SensorGraphService {
         );
 
         // チャートの外観をカスタマイズ
-        customizeChart(chart);
+        // customizeChart(chart);
 
         return chart;
     }
@@ -138,15 +166,16 @@ public class SensorGraphService {
         dateAxis.setDateFormatOverride(new java.text.SimpleDateFormat("HH:mm"));
         dateAxis.setLabelFont(new Font("NotoSansCJK", Font.PLAIN, 12));
 
-        // Y軸（温度軸）の設定
-        NumberAxis temperatureAxis = (NumberAxis) plot.getRangeAxis();
-        temperatureAxis.setLabelFont(new Font("NotoSansCJK", Font.PLAIN, 12));
+        // Y軸（データ軸）の設定
+        NumberAxis rangeAxis = (NumberAxis) plot.getRangeAxis();
+        rangeAxis.setLabelFont(new Font("NotoSansCJK", Font.PLAIN, 12));
     }
 
     /**
      * データがない場合のチャートを作成する
      */
-    private byte[] createNoDataChart(LocalDate date) {
+    public byte[] createNoDataChart(LocalDate date) {
+        // X軸となる TimeSeriesを作成
         TimeSeries series = new TimeSeries("Temperature");
         TimeSeriesCollection dataset = new TimeSeriesCollection();
         dataset.addSeries(series);
