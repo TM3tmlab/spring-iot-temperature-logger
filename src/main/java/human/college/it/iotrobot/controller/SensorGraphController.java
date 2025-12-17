@@ -55,4 +55,23 @@ public class SensorGraphController {
 
         return ResponseEntity.ok().contentType(MediaType.IMAGE_PNG).body(graphImageBytes);
     }
+
+    @GetMapping("/humidity")
+    public ResponseEntity<byte[]> getHumidityGraph(
+            @RequestParam("targetDate") LocalDate targetDate) {
+        // ここでSensorGraphServiceを使ってグラフ画像を生成し、バイト配列を取得する
+        byte[] graphImageBytes = sensorGraphService.generateHumidityGraphImage(targetDate);
+
+        return ResponseEntity.ok().contentType(MediaType.IMAGE_PNG).body(graphImageBytes);
+    }
+
+    @GetMapping("/pressure")
+    public ResponseEntity<byte[]> getPressureGraph(
+            @RequestParam("targetDate") LocalDate targetDate) {
+        // ここでSensorGraphServiceを使ってグラフ画像を生成し、バイト配列を取得する
+        byte[] graphImageBytes = sensorGraphService.generatePressureGraphImage(targetDate);
+
+        return ResponseEntity.ok().contentType(MediaType.IMAGE_PNG).body(graphImageBytes);
+    }
+
 }

@@ -85,11 +85,6 @@ public class SensorGraphService {
             // 対象日のセンサーデータを取得
             List<SensorEntity> sensors = getTargetDateSensors(date);
 
-            if (sensors.isEmpty()) {
-                // log.warn("No sensor data found for date: {}", date);
-                return createNoDataChart(date);
-            }
-
             // JFreeChartを作成
             JFreeChart chart = createTemperatureChart(sensors, date);
 
@@ -132,7 +127,7 @@ public class SensorGraphService {
         );
 
         // チャートの外観をカスタマイズ
-        // customizeChart(chart);
+        customizeChart(chart);
 
         return chart;
     }
@@ -158,7 +153,8 @@ public class SensorGraphService {
         XYLineAndShapeRenderer renderer = new XYLineAndShapeRenderer();
         renderer.setSeriesPaint(0, Color.BLUE);
         renderer.setSeriesStroke(0, new java.awt.BasicStroke(2.0f));
-        renderer.setSeriesShapesVisible(0, true);
+        // データの点の形状を非表示にする
+        renderer.setSeriesShapesVisible(0, false);
         plot.setRenderer(renderer);
 
         // X軸（時間軸）の設定
@@ -198,6 +194,104 @@ public class SensorGraphService {
             return outputStream.toByteArray();
         } catch (IOException e) {
             throw new RuntimeException("グラフ画像のバイト列変換に失敗しました", e);
+        }
+    }
+
+    private JFreeChart createHumidityChart(List<SensorEntity> sensors, LocalDate date) {
+        // TimeSeries作成
+        TimeSeries series = new TimeSeries("Humidity");
+
+        for (SensorEntity sensor : sensors) {
+            // LocalDateTimeをMinuteに変換
+            Minute minute = new Minute(
+                    Date.from(sensor.getTimestamp().atZone(ZoneId.systemDefault()).toInstant()));
+            series.add(minute, sensor.getHumidity());
+        }
+
+        // TimeSeriesCollectionを作成
+        // 時系列データのコレクションを取り扱う
+        TimeSeriesCollection dataset = new TimeSeriesCollection();
+        dataset.addSeries(series);
+
+        // チャートを作成
+        JFreeChart chart = ChartFactory.createTimeSeriesChart(
+                "Humidity Log - " + date.format(DateTimeFormatter.ofPattern("yyyy/MM/dd")), // タイトル
+                "Time", // X軸ラベル
+                "Humidity (%)", // Y軸ラベル
+                dataset, // データセット
+                true, // 凡例表示
+                true, // ツールチップ表示
+                false // URL表示
+        );
+
+        // チャートの外観をカスタマイズ
+        customizeChart(chart);
+
+        return chart;
+    }
+
+    public byte[] generateHumidityGraphImage(LocalDate date) {
+        try {
+            // 対象日のセンサーデータを取得
+            List<SensorEntity> sensors = getTargetDateSensors(date);
+
+            // JFreeChartを作成
+            JFreeChart chart = createHumidityChart(sensors, date);
+
+            // チャートを画像に変換
+            return chartToByteArray(chart, 800, 600);
+
+        } catch (Exception e) {
+            throw new RuntimeException("湿度グラフ画像の生成に失敗しました", e);
+        }
+    }
+
+    private JFreeChart createPressureChart(List<SensorEntity> sensors, LocalDate date) {
+        // TimeSeries作成
+        TimeSeries series = new TimeSeries("Pressure");
+
+        for (SensorEntity sensor : sensors) {
+            // LocalDateTimeをMinuteに変換
+            Minute minute = new Minute(
+                    Date.from(sensor.getTimestamp().atZone(ZoneId.systemDefault()).toInstant()));
+            series.add(minute, sensor.getPressure());
+        }
+
+        // TimeSeriesCollectionを作成
+        // 時系列データのコレクションを取り扱う
+        TimeSeriesCollection dataset = new TimeSeriesCollection();
+        dataset.addSeries(series);
+
+        // チャートを作成
+        JFreeChart chart = ChartFactory.createTimeSeriesChart(
+                "Pressure Log - " + date.format(DateTimeFormatter.ofPattern("yyyy/MM/dd")), // タイトル
+                "Time", // X軸ラベル
+                "Pressure (hPa)", // Y軸ラベル
+                dataset, // データセット
+                true, // 凡例表示
+                true, // ツールチップ表示
+                false // URL表示
+        );
+
+        // チャートの外観をカスタマイズ
+        customizeChart(chart);
+
+        return chart;
+    }
+
+    public byte[] generatePressureGraphImage(LocalDate date) {
+        try {
+            // 対象日のセンサーデータを取得
+            List<SensorEntity> sensors = getTargetDateSensors(date);
+
+            // JFreeChartを作成
+            JFreeChart chart = createPressureChart(sensors, date);
+
+            // チャートを画像に変換
+            return chartToByteArray(chart, 800, 600);
+
+        } catch (Exception e) {
+            throw new RuntimeException("気圧グラフ画像の生成に失敗しました", e);
         }
     }
 }
