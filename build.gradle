@@ -40,6 +40,7 @@ dependencies {
 	annotationProcessor 'org.projectlombok:lombok'
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
 	testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
+	runtimeOnly 'org.springframework.boot:spring-boot-properties-migrator'
 }
 
 tasks.named('test') {
@@ -53,7 +54,5 @@ springBootPropertiesMigrator {
 
 // run ./gradlew springBootPropertiesMigratorAnalyze
 // check build/reports/spring-boot-migration-report.txt
-tasks.named("springBootPropertiesMigratorMigrate") {
-    includes.set(listOf("src/main/resources/application.yaml", "src/main/resources/application-dev.yaml"))
-}
+
 
